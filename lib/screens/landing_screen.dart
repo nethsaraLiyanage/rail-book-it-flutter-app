@@ -14,6 +14,14 @@ class LandingScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var appBarHeight = height * 0.25;
 
+    void _onBookNow() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const BookNowScreen(),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -105,13 +113,7 @@ class LandingScreen extends StatelessWidget {
                   BottomNavigationButton(
                     buttonText: 'Book Now',
                     buttonIcon: const Icon(Icons.train_outlined),
-                    onButtonTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (ctx) => BookNowScreen(),
-                        ),
-                      );
-                    },
+                    onButtonTap: _onBookNow,
                   ),
                   BottomNavigationButton(
                     buttonText: 'Train Schedule',

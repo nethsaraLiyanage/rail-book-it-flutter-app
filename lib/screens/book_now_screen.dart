@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:railway/widgets/from_to_widget.dart';
 
 class BookNowScreen extends StatefulWidget {
   const BookNowScreen({super.key});
@@ -12,6 +13,10 @@ class _BookNowScreenState extends State<BookNowScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var containerWidth = width * 0.9;
+
+    final _fromController = TextEditingController();
+    final _toController = TextEditingController();
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 22, 142, 84),
@@ -32,10 +37,25 @@ class _BookNowScreenState extends State<BookNowScreen> {
             children: [
               Container(
                 height: height - 125 - 90,
-                width: width * 0.9,
+                width: containerWidth,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: containerWidth * 0.5,
+                      child: Column(
+                        children: [
+                          FromToWidget(
+                            fromController: _fromController,
+                            toController: _toController,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -49,9 +69,9 @@ class _BookNowScreenState extends State<BookNowScreen> {
                 width: 160,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 76, 228, 81)),
+                      backgroundColor: const Color.fromARGB(255, 76, 228, 81)),
                   onPressed: () {},
-                  child: Text('Next'),
+                  child: const Text('Next'),
                 ),
               )
             ],
