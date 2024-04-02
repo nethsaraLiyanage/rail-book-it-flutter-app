@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:railway/widgets/from_to_widget.dart';
+
+import 'package:railway/widgets/enter_date.dart';
+import 'package:railway/widgets/enter_station.dart';
 
 class BookNowScreen extends StatefulWidget {
   const BookNowScreen({super.key});
@@ -26,6 +28,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
+            //Logo
             height: 125,
             width: 125,
             child: Image.asset(
@@ -38,6 +41,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                //Big white box
                 height: height - 125 - 90,
                 width: containerWidth,
                 decoration: BoxDecoration(
@@ -49,92 +53,82 @@ class _BookNowScreenState extends State<BookNowScreen> {
                     SizedBox(
                       width: containerWidth * 0.5,
                       child: Column(
+                        //Left column in big white box
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          FromToWidget(
-                            fromController: fromController,
-                            toController: toController,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                EnterStation(
+                                  textController: fromController,
+                                  title: 'From',
+                                ),
+                                const Icon(
+                                  Icons.train_rounded,
+                                  size: 40,
+                                ),
+                                EnterStation(
+                                  textController: toController,
+                                  title: 'To',
+                                ),
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Departure Date'),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 8),
-                                      width: 240,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 3, bottom: 5),
-                                            child: SizedBox(
-                                              width: 180,
-                                              child: TextField(
-                                                controller: departureController,
-                                              ),
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                Icons.calendar_month),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                EnterDate(
+                                  textController: departureController,
+                                  title: 'Departure Date',
                                 ),
                                 const SizedBox(
                                   width: 30,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Return Date'),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 8),
-                                      width: 240,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 3,
-                                              bottom: 5,
-                                            ),
-                                            child: SizedBox(
-                                              width: 180,
-                                              child: TextField(
-                                                controller: returnController,
-                                              ),
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                Icons.calendar_month),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                EnterDate(
+                                  textController: returnController,
+                                  title: 'Return Date',
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 16.0),
+                            child: Text('Class'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  width: 250,
+                                  height: 40,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                    child: Text('First Class'),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  width: 250,
+                                  height: 40,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                    child: Text('Second Class'),
+                                  ),
                                 )
                               ],
                             ),
