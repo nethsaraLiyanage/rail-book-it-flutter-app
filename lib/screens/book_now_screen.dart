@@ -16,6 +16,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var containerWidth = width * 0.9;
+    var containerHeight = height - 125 - 90;
 
     final fromController = TextEditingController();
     final toController = TextEditingController();
@@ -42,7 +43,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
             children: [
               Container(
                 //Big white box
-                height: height - 125 - 90,
+                height: containerHeight,
                 width: containerWidth,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -52,15 +53,17 @@ class _BookNowScreenState extends State<BookNowScreen> {
                   children: [
                     SizedBox(
                       width: containerWidth * 0.5,
-                      child: Column(
-                        //Left column in big white box
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
+                      height: containerHeight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 25.0),
+                        child: Column(
+                          //Left column in big white box
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 EnterStation(
                                   textController: fromController,
@@ -76,11 +79,8 @@ class _BookNowScreenState extends State<BookNowScreen> {
                                 ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 EnterDate(
                                   textController: departureController,
@@ -95,45 +95,88 @@ class _BookNowScreenState extends State<BookNowScreen> {
                                 )
                               ],
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 16.0),
-                            child: Text('Class'),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            const SizedBox(height: 10),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Class'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 250,
+                                        height: 40,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.grey,
+                                          ),
+                                          onPressed: () {},
+                                          child: Text('First Class'),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      SizedBox(
+                                        width: 250,
+                                        height: 40,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.grey,
+                                          ),
+                                          onPressed: () {},
+                                          child: Text('Second Class'),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  SizedBox(
+                                    width: 250,
+                                    height: 40,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.grey,
+                                      ),
+                                      onPressed: () {},
+                                      child: Text('Third Class'),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            const Text('Number of Passengers'),
+                            Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  width: 250,
+                                  width: 40,
                                   height: 40,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.grey,
-                                    ),
-                                    onPressed: () {},
-                                    child: Text('First Class'),
-                                  ),
+                                  decoration: BoxDecoration(color: Colors.grey),
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.remove)),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  width: 250,
+                                  alignment: Alignment.center,
                                   height: 40,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.grey,
-                                    ),
-                                    onPressed: () {},
-                                    child: Text('Second Class'),
-                                  ),
-                                )
+                                  width: 40,
+                                  child: Text('1'),
+                                ),
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(color: Colors.grey),
+                                  child: IconButton(
+                                      onPressed: () {}, icon: Icon(Icons.add)),
+                                ),
                               ],
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
