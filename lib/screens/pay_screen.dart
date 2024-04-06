@@ -35,6 +35,13 @@ class _PayScreenState extends State<PayScreen> {
       'March',
       'April',
       'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
 
     String expiryYearValue = 'YY';
