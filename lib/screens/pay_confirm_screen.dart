@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:railway/screens/pay_screen.dart';
-import 'package:railway/widgets/book_now_left.dart';
+class PayConfirmScreen extends StatelessWidget {
+  const PayConfirmScreen({super.key});
 
-class BookNowScreen extends StatefulWidget {
-  const BookNowScreen({super.key});
-
-  @override
-  State<BookNowScreen> createState() => _BookNowScreenState();
-}
-
-class _BookNowScreenState extends State<BookNowScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var containerWidth = width * 0.9;
     var containerHeight = height - 125 - 90;
-    var columnWidth = containerWidth * 0.5;
-    var seatContainerWidth = columnWidth * 0.8;
-    var seatContainerHeight = containerHeight * 0.8;
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 22, 142, 84),
       body: Column(
@@ -40,45 +28,16 @@ class _BookNowScreenState extends State<BookNowScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                //Big white box
                 height: containerHeight,
                 width: containerWidth,
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
-                  children: [
-                    BookNowLeft(
-                      containerWidth: containerWidth,
-                      containerHeight: containerHeight,
-                    ),
-                    SizedBox(
-                      width: columnWidth,
-                      height: containerHeight,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            'Select Seat',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                  fontSize: 22,
-                                ),
-                          ),
-                          Container(
-                            height: seatContainerHeight,
-                            width: seatContainerWidth,
-                            decoration: BoxDecoration(color: Colors.grey[200]),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  children: [],
                 ),
-              ),
+              )
             ],
           ),
           Row(
@@ -104,13 +63,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 76, 228, 81)),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => PayScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                   child: const Text('Next'),
                 ),
               )

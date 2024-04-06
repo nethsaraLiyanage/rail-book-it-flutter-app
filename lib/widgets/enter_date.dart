@@ -15,7 +15,12 @@ class EnterDate extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontSize: 20,
+              ),
+        ),
         Container(
           margin: const EdgeInsets.only(top: 8),
           width: 240,

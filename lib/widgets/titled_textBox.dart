@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-class EnterStation extends StatelessWidget {
-  const EnterStation({
+class TitledTextBox extends StatelessWidget {
+  const TitledTextBox({
     super.key,
-    required this.textController,
     required this.title,
+    required this.textController,
   });
-
   final String title;
   final TextEditingController textController;
 
