@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:railway/screens/book_now_screen.dart';
 
+import 'package:railway/screens/book_now_screen.dart';
+import 'package:railway/screens/search_trains_schedule_screen.dart';
 import 'package:railway/widgets/app_bar_title.dart';
 import 'package:railway/widgets/app_bar_buttons.dart';
 import 'package:railway/widgets/bottom_navigation_button.dart';
@@ -18,6 +19,14 @@ class LandingScreen extends StatelessWidget {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (ctx) => const BookNowScreen(),
+        ),
+      );
+    }
+
+    void onTrainSchedule() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => const SearchTrainScheduleScreen(),
         ),
       );
     }
@@ -118,7 +127,7 @@ class LandingScreen extends StatelessWidget {
                   BottomNavigationButton(
                     buttonText: 'Train Schedule',
                     buttonIcon: const Icon(Icons.calendar_month),
-                    onButtonTap: () {},
+                    onButtonTap: onTrainSchedule,
                   ),
                   BottomNavigationButton(
                     buttonText: 'Manage Bookings',

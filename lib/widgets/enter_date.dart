@@ -35,6 +35,7 @@ class EnterDate extends StatelessWidget {
                 child: SizedBox(
                   width: 180,
                   child: TextField(
+                    decoration: const InputDecoration(border: InputBorder.none),
                     controller: textController,
                   ),
                 ),

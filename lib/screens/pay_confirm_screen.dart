@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:railway/screens/landing_screen.dart';
-import 'package:railway/widgets/bottom_navigation_button.dart';
 
+import 'package:railway/screens/booking_confirmed_screen.dart';
+import 'package:railway/screens/landing_screen.dart';
 import 'package:railway/widgets/pay_detail_row.dart';
 
 class PayConfirmScreen extends StatelessWidget {
@@ -17,6 +17,15 @@ class PayConfirmScreen extends StatelessWidget {
     var payContainerWidth = columnWidth * 0.8;
     var payContainerHeight = containerHeight * 0.8;
     var payRowTop = payContainerHeight * 0.06;
+
+    void onConfirmed() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (ctx) => BookingConfirmedScreen(),
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 22, 142, 84),
@@ -174,7 +183,7 @@ class PayConfirmScreen extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color.fromARGB(
                                             255, 76, 228, 81)),
-                                    onPressed: () {},
+                                    onPressed: onConfirmed,
                                     child:
                                         const Text('Send E-ticket Via Email'),
                                   ),

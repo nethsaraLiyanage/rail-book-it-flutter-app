@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class EnterStation extends StatelessWidget {
-  const EnterStation({
+class TextBoxRow extends StatelessWidget {
+  const TextBoxRow({
     super.key,
-    required this.textController,
     required this.title,
+    required this.infoController,
   });
 
   final String title;
-  final TextEditingController textController;
+  final TextEditingController infoController;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
@@ -27,8 +27,7 @@ class EnterStation extends StatelessWidget {
           width: 240,
           decoration: BoxDecoration(border: Border.all(color: Colors.black)),
           child: TextField(
-            decoration: const InputDecoration(border: InputBorder.none),
-            controller: textController,
+            controller: infoController,
           ),
         ),
       ],

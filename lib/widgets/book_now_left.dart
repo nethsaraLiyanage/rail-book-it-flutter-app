@@ -18,8 +18,8 @@ class BookNowLeft extends StatelessWidget {
     final toController = TextEditingController();
     final departureController = TextEditingController();
     final returnController = TextEditingController();
+
     return SizedBox(
-      //Left column in big white box
       width: containerWidth * 0.5,
       height: containerHeight,
       child: Padding(
@@ -63,87 +63,81 @@ class BookNowLeft extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    'Class',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 20,
+                        ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 250,
+                      height: 40,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey,
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'First Class',
+                          style:
+                              Theme.of(context).textTheme.labelLarge!.copyWith(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    SizedBox(
+                      width: 250,
+                      height: 40,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey,
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          'Second Class',
+                          style:
+                              Theme.of(context).textTheme.labelLarge!.copyWith(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: 250,
+                  height: 40,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                    ),
+                    onPressed: () {},
                     child: Text(
-                      'Class',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontSize: 20,
+                      'Third Class',
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                            fontSize: 15,
+                            color: Colors.white,
                           ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 250,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            'First Class',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      SizedBox(
-                        width: 250,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            'Second Class',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: 250,
-                    height: 40,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey,
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Third Class',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              fontSize: 15,
-                              color: Colors.white,
-                            ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
             const SizedBox(
               height: 8,
