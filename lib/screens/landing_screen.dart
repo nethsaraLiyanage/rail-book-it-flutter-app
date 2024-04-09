@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:railway/providers/language_provider.dart';
+import 'package:railway/providers/log_in_provider.dart';
 import 'package:railway/screens/book_now_screen.dart';
+import 'package:railway/screens/log_in_screen.dart';
 import 'package:railway/screens/search_trains_schedule_screen.dart';
 import 'package:railway/widgets/app_bar_title.dart';
-import 'package:railway/widgets/app_bar_buttons.dart';
 import 'package:railway/widgets/bottom_navigation_button.dart';
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends ConsumerStatefulWidget {
   const LandingScreen({super.key});
+
+  @override
+  ConsumerState<LandingScreen> createState() => _LandingScreenState();
+}
+
+class _LandingScreenState extends ConsumerState<LandingScreen> {
+  String dropDownValue = 'English';
+
+  void _onBookNow(context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => const BookNowScreen(),
+      ),
+    );
+  }
+
+  void onTrainSchedule(context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => const SearchTrainScheduleScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +41,19 @@ class LandingScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var appBarHeight = height * 0.25;
 
-    void _onBookNow() {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => const BookNowScreen(),
-        ),
-      );
-    }
+    final dynamicLogText = ref.watch(logTextProvider);
+    final language = ref.watch(languageProvider);
 
-    void onTrainSchedule() {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => const SearchTrainScheduleScreen(),
-        ),
-      );
+    void onLogIn() {
+      if (dynamicLogText == 'Log In') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => LogInScreen(),
+          ),
+        );
+        ref.read(logTextProvider.notifier).toggleLogText();
+      }
     }
 
     return Scaffold(
@@ -39,10 +64,76 @@ class LandingScreen extends StatelessWidget {
               width: width,
               height: appBarHeight,
               color: const Color.fromARGB(240, 199, 198, 198),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [AppBarTitle(), AppBarButtons()],
+                children: [
+                  const AppBarTitle(),
+                  SizedBox(
+                    width: 400,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: 150,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green,
+                          ),
+                          child: TextButton(
+                            onPressed: onLogIn,
+                            child: Text(
+                              dynamicLogText,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium!
+                                  .copyWith(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 150,
+                          height: 35,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green,
+                          ),
+                          child: DropdownButton<String>(
+                              value: dropDownValue,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              style: const TextStyle(color: Colors.white),
+                              underline: Container(height: 0),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  dropDownValue = newValue!;
+                                });
+                                ref
+                                    .read(languageProvider.notifier)
+                                    .toggleLanguage(dropDownValue);
+                              },
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'English',
+                                  child: Text('English'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Sinhala',
+                                  child: Text('Sinhala'),
+                                )
+                              ]),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.person_2_outlined))
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
             Stack(
@@ -68,25 +159,29 @@ class LandingScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Explore Sri Lanka By Train',
+                              language == 'Sinhala'
+                                  ? 'දුම්රියෙන් ශ්‍රී ලංකාව ගවේෂණය කරන්න'
+                                  : 'Explore Sri Lanka By Train',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32,
+                                    fontSize: language == 'Sinhala' ? 25 : 32,
                                   ),
                             ),
                             Text(
-                              'Book Your Tickets Now',
+                              language == 'Sinhala'
+                                  ? 'ඔබගේ ප්‍රවේශපත්‍ර දැන්ම වෙන්කරවා ගන්න'
+                                  : 'Book Your Tickets Now',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32,
+                                    fontSize: language == 'Sinhala' ? 25 : 32,
                                   ),
                             )
                           ],
@@ -95,12 +190,14 @@ class LandingScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          'Rail Bookit Self-Kiosk',
+                          language == 'Sinhala'
+                              ? 'රේල් බුකිට් ස්වයං-කියෝස්ක්'
+                              : 'Rail Bookit Self-Kiosk',
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 32,
+                                    fontSize: language == 'Sinhala' ? 25 : 32,
                                   ),
                         ),
                       )
@@ -115,22 +212,31 @@ class LandingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BottomNavigationButton(
-                    buttonText: 'Home',
+                    buttonText: language == 'Sinhala' ? 'මුල් පිටුව' : 'Home',
                     buttonIcon: const Icon(Icons.home),
                     onButtonTap: () {},
                   ),
                   BottomNavigationButton(
-                    buttonText: 'Book Now',
+                    buttonText:
+                        language == 'Sinhala' ? 'දැන්ම වෙන්කරගන්න' : 'Book Now',
                     buttonIcon: const Icon(Icons.train_outlined),
-                    onButtonTap: _onBookNow,
+                    onButtonTap: () {
+                      _onBookNow(context);
+                    },
                   ),
                   BottomNavigationButton(
-                    buttonText: 'Train Schedule',
+                    buttonText: language == 'Sinhala'
+                        ? 'දුම්රිය කාලසටහන'
+                        : 'Train Schedule',
                     buttonIcon: const Icon(Icons.calendar_month),
-                    onButtonTap: onTrainSchedule,
+                    onButtonTap: () {
+                      onTrainSchedule(context);
+                    },
                   ),
                   BottomNavigationButton(
-                    buttonText: 'Manage Bookings',
+                    buttonText: language == 'Sinhala'
+                        ? 'වෙන් කිරීම් කළමනාකරණය'
+                        : 'Manage Bookings',
                     buttonIcon: const Icon(Icons.person_2_outlined),
                     onButtonTap: () {},
                   ),

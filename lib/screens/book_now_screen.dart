@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:railway/providers/language_provider.dart';
+
 import 'package:railway/screens/pay_screen.dart';
 import 'package:railway/widgets/book_now_left.dart';
 
-class BookNowScreen extends StatefulWidget {
+class BookNowScreen extends ConsumerStatefulWidget {
   const BookNowScreen({super.key});
 
   @override
-  State<BookNowScreen> createState() => _BookNowScreenState();
+  ConsumerState<BookNowScreen> createState() => _BookNowScreenState();
 }
 
-class _BookNowScreenState extends State<BookNowScreen> {
+class _BookNowScreenState extends ConsumerState<BookNowScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -20,6 +23,8 @@ class _BookNowScreenState extends State<BookNowScreen> {
     var columnWidth = containerWidth * 0.5;
     var seatContainerWidth = columnWidth * 0.8;
     var seatContainerHeight = containerHeight * 0.8;
+
+    final language = ref.watch(languageProvider);
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 22, 142, 84),
@@ -60,12 +65,15 @@ class _BookNowScreenState extends State<BookNowScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Select Seat',
+                            language == 'Sinhala'
+                                ? 'ආසනය තෝරන්න'
+                                : 'Select Seat',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!
                                 .copyWith(
                                   fontSize: 22,
+                                  fontFamily: 'Noto Serif Sinhala',
                                 ),
                           ),
                           Container(
@@ -94,7 +102,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Back'),
+                  child: Text(language == 'Sinhala' ? 'ආපසු' : 'Back'),
                 ),
               ),
               Container(
@@ -111,7 +119,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
                       ),
                     );
                   },
-                  child: const Text('Next'),
+                  child: Text(language == 'Sinhala' ? 'ඊළඟ' : 'Next'),
                 ),
               )
             ],

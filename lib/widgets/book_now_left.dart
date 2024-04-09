@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:railway/providers/language_provider.dart';
+
 import 'package:railway/widgets/enter_date.dart';
 import 'package:railway/widgets/enter_station.dart';
 
-class BookNowLeft extends StatelessWidget {
+class BookNowLeft extends ConsumerWidget {
   const BookNowLeft({
     super.key,
     required this.containerWidth,
@@ -13,11 +16,13 @@ class BookNowLeft extends StatelessWidget {
   final double containerHeight;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final fromController = TextEditingController();
     final toController = TextEditingController();
     final departureController = TextEditingController();
     final returnController = TextEditingController();
+
+    final language = ref.watch(languageProvider);
 
     return SizedBox(
       width: containerWidth * 0.5,
@@ -34,7 +39,7 @@ class BookNowLeft extends StatelessWidget {
               children: [
                 EnterStation(
                   textController: fromController,
-                  title: 'From',
+                  title: language == 'Sinhala' ? 'සිට' : 'From',
                 ),
                 const Icon(
                   Icons.train_rounded,
@@ -42,7 +47,7 @@ class BookNowLeft extends StatelessWidget {
                 ),
                 EnterStation(
                   textController: toController,
-                  title: 'To',
+                  title: language == 'Sinhala' ? 'දක්වා' : 'To',
                 ),
               ],
             ),
@@ -51,14 +56,18 @@ class BookNowLeft extends StatelessWidget {
               children: [
                 EnterDate(
                   textController: departureController,
-                  title: 'Departure Date',
+                  title: language == 'Sinhala'
+                      ? 'පිටත්වෙන දිනය'
+                      : 'Departure Date',
                 ),
                 const SizedBox(
                   width: 30,
                 ),
                 EnterDate(
                   textController: returnController,
-                  title: 'Return Date',
+                  title: language == 'Sinhala'
+                      ? 'ආපසු පැමිණීමේ දිනය'
+                      : 'Return Date',
                 )
               ],
             ),
