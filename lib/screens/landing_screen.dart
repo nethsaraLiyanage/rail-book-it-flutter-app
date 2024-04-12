@@ -246,19 +246,6 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   type: BottomNavigationBarType.fixed,
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.train_outlined), label: 'Book Now'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.calendar_month), label: 'Train Schedule'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.person_2_outlined), label: 'Manage Bookings'),
-      //   ],
-      //   onTap: (index) {},
-      // ),
     );
   }
 }

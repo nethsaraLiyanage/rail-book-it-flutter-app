@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PayDetailRow extends StatelessWidget {
-  const PayDetailRow({
-    super.key,
-    required this.parameter,
-    required this.data,
-    required this.top,
-  });
+  const PayDetailRow(
+      {super.key,
+      required this.parameter,
+      required this.data,
+      required this.top,
+      required this.height});
   final String parameter;
   final String data;
   final double top;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +22,13 @@ class PayDetailRow extends StatelessWidget {
           Text(
             parameter,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: 20,
+                  fontSize: height * 0.03,
                 ),
           ),
           Text(
             data,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontSize: 20,
+                  fontSize: height * 0.03,
                 ),
           ),
         ],

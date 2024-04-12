@@ -82,16 +82,19 @@ class PayConfirmScreen extends StatelessWidget {
                                   top: payRowTop,
                                   parameter: 'From:',
                                   data: 'Kandy',
+                                  height: height,
                                 ),
                                 PayDetailRow(
                                   top: payRowTop,
                                   parameter: 'To:',
                                   data: 'Colombo',
+                                  height: height,
                                 ),
                                 PayDetailRow(
                                   top: payRowTop,
                                   parameter: 'Passenger Count:',
                                   data: '1',
+                                  height: height,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
@@ -138,11 +141,13 @@ class PayConfirmScreen extends StatelessWidget {
                                   top: payRowTop,
                                   parameter: 'Train',
                                   data: 'Udarata Manike Express',
+                                  height: height,
                                 ),
                                 PayDetailRow(
                                   top: payRowTop,
                                   parameter: 'Seat Number',
                                   data: '${12}',
+                                  height: height,
                                 ),
                               ],
                             ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:railway/providers/language_provider.dart';
-
 import 'package:railway/screens/landing_screen.dart';
-import 'package:railway/screens/register_screen.dart';
 
-class LogInScreen extends ConsumerWidget {
-  const LogInScreen({super.key});
+class RegisterScreen extends ConsumerWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,19 +17,12 @@ class LogInScreen extends ConsumerWidget {
 
     final language = ref.watch(languageProvider);
 
-    void onLogIn() {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (ctx) => LandingScreen()),
-        (route) => false,
-      );
-    }
-
     void onRegister() {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) => RegisterScreen(),
-        ),
-      );
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (ctx) => LandingScreen(),
+          ),
+          (route) => false);
     }
 
     return Scaffold(
@@ -40,7 +32,7 @@ class LogInScreen extends ConsumerWidget {
             width: width,
             height: height,
             child: Image.asset(
-              'assets/images/login.jpg',
+              'assets/images/sign.jpg',
               fit: BoxFit.fill,
             ),
           ),
@@ -73,7 +65,9 @@ class LogInScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            language == 'Sinhala' ? 'ඇතුල් වන්න' : 'Log In',
+                            language == 'Sinhala'
+                                ? 'පටන් ගනිමු'
+                                : 'Let\'s Get Started',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge!
@@ -87,8 +81,8 @@ class LogInScreen extends ConsumerWidget {
                             children: [
                               Text(
                                 language == 'Sinhala'
-                                    ? 'විද්යුත් තැපෑල'
-                                    : 'Email',
+                                    ? 'ඊමේල් එකක් ඇතුලත් කරන්න'
+                                    : 'Enter a Email',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -114,7 +108,9 @@ class LogInScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                language == 'Sinhala' ? 'මුරපදය' : 'Password',
+                                language == 'Sinhala'
+                                    ? 'මුරපදයක් ඇතුලත් කරන්න'
+                                    : 'Enter a Password',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -143,43 +139,12 @@ class LogInScreen extends ConsumerWidget {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       const Color.fromARGB(255, 76, 228, 81)),
-                              onPressed: onLogIn,
-                              child: Text(
-                                language == 'Sinhala' ? 'ඇතුල් වන්න' : 'Log In',
-                              ),
+                              onPressed: onRegister,
+                              child: Text(language == 'Sinhala'
+                                  ? 'ලියාපදිංචි කරන්න'
+                                  : 'Register'),
                             ),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                language == 'Sinhala'
-                                    ? 'ගිණුමක් නැද්ද?'
-                                    : 'Don\'t have an account?',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                              ),
-                              TextButton(
-                                onPressed: onRegister,
-                                child: Text(
-                                  language == 'Sinhala'
-                                      ? 'ලියාපදිංචි කරන්න'
-                                      : 'Register',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     )
